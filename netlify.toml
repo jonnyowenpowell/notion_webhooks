@@ -1,2 +1,3 @@
 [functions]
   directory = "webhooks"
+  node_bundler = "esbuild"

@@ -1,0 +1,11 @@
+{
+  "name": "webhooks",
+  "version": "1.0.0",
+  "description": "Dependencies for JavaScript webhooks.",
+  "repository": "git@github.com:jonnyowenpowell/webhooks.git",
+  "author": "Jonny Powell <jonnyowenpowell@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "@notionhq/client": "^0.2.0"
+  }
+}

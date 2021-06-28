@@ -1,15 +1,29 @@
-// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+const { Client } = require("@notionhq/client")
+
+
+const notion = new Client({
+  auth: process.env.NOTION_TOKEN,
+})
+const database_id = process.env.NOTION_DATABASE_ID
+
 const handler = async (event) => {
   try {
-    const subject = event.queryStringParameters.name || 'World'
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
+    const req = JSON.parse(event.body)
+    if (req.type === 'transaction.created') {
+      const amount = req.data.amount / 100
+      const description = req.data.description
+      await notion.pages.create({
+        parent: { database_id },
+        properties: {
+          Name: [{ text: { content: description } }],
+          Amount: amount,
+        },
+      })
     }
+    
+    return { statusCode: 200 }
   } catch (error) {
+    console.log(error)
     return { statusCode: 500, body: error.toString() }
   }
 }
