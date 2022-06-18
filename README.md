@@ -1,3 +1,3 @@
 # Webhooks
 
-This repository contains the code for my personal webhooks, hosted in Netlify.
+This repository contains the code for my personal Notion webhooks, hosted in Netlify.
